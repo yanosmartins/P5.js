@@ -1,13 +1,14 @@
 var bordaX = 1650;
 var bordaY = 880;
 
-let x =(bordaX / 2)+400;
- 
+let x = (bordaX / 2) + 400;
+
 let y = (bordaY / 2);
-let Xsus = (bordaX / 2)-400;
+let Xsus = (bordaX / 2) - 400;
 let Ysus = (bordaY / 2);
 
 var aresta = 50;
+var contador = 0;
 
 function setup() {
     createCanvas(bordaX, bordaY);
@@ -19,13 +20,18 @@ function draw() {
     moveFleurins()
     checkColisao()
     moveSUS()
-    
+
     //text('"', 724, 780);
     //text(key, 730, 780);
     //text('"', 795, 780);
-    
+    textSize(20);
+    text('Número de colisões: ', (bordaX / 2 - 50), 100,);
+
+
+    text(contador, 1000, 100,);
+
     rect(x, y, aresta, aresta);
-    
+
     rect(Xsus, Ysus, 50, 50);
     function moveFleurins(controle) {
         // var controle = controle;
@@ -82,7 +88,8 @@ function draw() {
         while (x > Xsus - aresta && x < Xsus + aresta && y > Ysus - aresta && y < Ysus + aresta) {
             fill(random(255), random(255), random(255));
             text('COLIDIU!', (bordaX / 2), 120);
-            return
+            
+            return contador += 1;
 
         }
     }
