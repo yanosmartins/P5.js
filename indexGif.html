@@ -1,0 +1,110 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body>
+    <div style="justify-content: center; align-items:center;">
+        <img align="center" alt="Yan's-gif" width="300" height="200" src="https://media.tenor.com/az7zBa8Qz3EAAAAC/frog.gif" style="border-radius: 8%;">
+    </div>
+
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Colisão de Dois Quadrados em p5.js</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+</head>
+<body>
+  <script>
+    let square1;
+    let square2;
+
+    function setup() {
+      createCanvas(400, 400);
+      // Inicializar os quadrados com posições e tamanhos diferentes
+      square1 = new Square(100, 100, 50, color(255, 0, 0));
+      square2 = new Square(200, 200, 30, color(0, 0, 255));
+      // Definir a velocidade inicial dos quadrados
+      square1.setVelocity(1, 1);
+      square2.setVelocity(-1, -1);
+    }
+
+    function draw() {
+      background(220);
+      // Atualizar a posição dos quadrados
+      square1.update();
+      square2.update();
+
+      // Verificar colisão
+      if (checkCollision(square1, square2)) {
+        square1.changeColor(color(255, 165, 0));
+        square2.changeColor(color(255, 165, 0));
+      } else {
+        square1.changeColor(color(255, 0, 0));
+        square2.changeColor(color(0, 0, 255));
+      }
+
+      // Desenhar os quadrados
+      square1.display();
+      square2.display();
+    }
+
+    function checkCollision(sq1, sq2) {
+      // Verificar se há colisão entre os quadrados usando a sobreposição de retângulos
+      return !(sq1.x + sq1.size / 2 < sq2.x - sq2.size / 2 ||
+        sq1.x - sq1.size / 2 > sq2.x + sq2.size / 2 ||
+        sq1.y + sq1.size / 2 < sq2.y - sq2.size / 2 ||
+        sq1.y - sq1.size / 2 > sq2.y + sq2.size / 2);
+    }
+
+    class Square {
+      constructor(x, y, size, color) {
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.color = color;
+        this.vx = 0;
+        this.vy = 0;
+      }
+
+      setVelocity(vx, vy) {
+        this.vx = vx;
+        this.vy = vy;
+      }
+
+      update() {
+        // Atualizar a posição do quadrado com base na velocidade
+        this.x += this.vx;
+        this.y += this.vy;
+
+        // Verificar colisão com as bordas da tela
+        if (this.x - this.size / 2 < 0 || this.x + this.size / 2 > width) {
+          this.vx *= -1;
+        }
+        if (this.y - this.size / 2 < 0 || this.y + this.size / 2 > height) {
+          this.vy *= -1;
+        }
+      }
+
+      display() {
+        fill(this.color);
+        rectMode(CENTER);
+        rect(this.x, this.y, this.size, this.size);
+      }
+
+      changeColor(newColor) {
+        this.color = newColor;
+      }
+    }
+  </script>
+</body>
+</html>
