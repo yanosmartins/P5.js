@@ -18,7 +18,7 @@ function draw() {
     background(100);
     colideBordas()
     moveFleurins()
-    checkColisao()
+    checkColisao();
     moveSUS()
 
     //text('"', 724, 780);
@@ -85,12 +85,14 @@ function draw() {
     }
 
     function checkColisao() {
-        while (x > Xsus - aresta && x < Xsus + aresta && y > Ysus - aresta && y < Ysus + aresta) {
+        if (x > Xsus - aresta && x < Xsus + aresta && y > Ysus - aresta && y < Ysus + aresta) {
+            contador = 0;
             fill(random(255), random(255), random(255));
             text('COLIDIU!', (bordaX / 2), 120);
-            
-            return contador += 1;
-
+            setTimeout(function () {
+                contador += 1;
+            }, 1000)
+            return contador;
         }
     }
 
