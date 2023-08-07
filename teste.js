@@ -8,17 +8,17 @@ let Xsus = (bordaX / 2) - 400;
 let Ysus = (bordaY / 2);
 
 var aresta = 50;
-var contador = 0;
 
 function setup() {
     createCanvas(bordaX, bordaY);
 }
 
 function draw() {
+    checkColisao();
+    var contador = 0;
     background(100);
     colideBordas()
     moveFleurins()
-    checkColisao();
     moveSUS()
 
     //text('"', 724, 780);
@@ -110,8 +110,5 @@ function draw() {
             Ysus += 5;
         }
     }
-
-
-
 
 }
